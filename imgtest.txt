@@ -1,0 +1,9 @@
+/var/www/dev_tlapi/Emotion/Emotion/test/happy.png
+/var/www/dev_tlapi/Emotion/Emotion/test/happy2.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/fear.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/fear2.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/content.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/anxiety.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/anxiety2.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/angry.jpg
+/var/www/dev_tlapi/Emotion/Emotion/test/angry2.jpg

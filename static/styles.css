@@ -1,0 +1,61 @@
+
+.square-card.mdl-card {
+    width: 300px;
+    height: 300px;
+ }
+
+.rectangle-card.mdl-card{
+    width: 500px;
+    height: 450px;
+    margin-bottom: 10px;
+    display:inline-block
+}
+
+.mdl-grid {
+    max-width: 100%;
+    width: 600px;
+    height: auto;
+    margin-top: 40px;
+}
+.mdl-card__media{
+    background-color:rgb(14, 13, 13);
+    display: flex;
+    justify-content: center;
+}
+
+.mdl-card__media > img {
+        max-width: 106%;
+        width: auto;
+        height: auto; /* ie8 */
+}
+.mdl-card__actions {
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+}
+.mdl-card__actions > .mdl-button--icon {
+    margin-right: 3px;
+    margin-left: 3px;
+}
+.mdl-button {
+    margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.mdl-cell {
+    padding: 10px;
+}
+
+.to_center {
+    align-items: center;
+    justify-content: center;
+  }
+
+.stream, #basic-stream, #screenshot-video, #screenshot-img{
+    width: 106%;
+    height: 90%;
+}
+.mdl-card__media{
+    background-color:white;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <!-- <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script> -->
+    <meta content="initial-scale=1, width=device-width shrink-to-fit=yes" name="viewport" />
+    <meta charset="utf-8" />
+    <title>Emotion detector</title>
+
+<style>
+    #output_screenshot{
+        display: none;
+
+
+    
+    }
+    #processed-img{
+    width: 500px;
+    height: 375px;
+    background-color: #666;
+    /*Mirror code starts*/
+    /* transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    /* -moz-transform:rotateY(180deg); Firefox */ */
+    /*Mirror code ends*/
+}
+    #screenshot-video {
+    width: 500px;
+    height: 375px;
+    background-color: #666;
+    /*Mirror code starts*/
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
+    /*Mirror code ends*/
+}
+</style>
+</head>
+<body>
+    <!-- <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header"> -->
+
+
+<!--  -->
+
+      
+<!--index started from here-->
+
+    <div class='to_center' justify-content='center'>
+    <div id='webcam' class="rectangle-card content-column mdl-card mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-shadow--2dp" >
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text mdl-color-text--light-blue-900">Live Feed</h2>
+        </div>
+        <div class='mdl-card__media'>
+            <video id="screenshot-video" class="videostream" autoplay></video>
+        </div>
+
+        <div class="mdl-card__supporting-text" >
+            <canvas id='canvas-element' style="display:none;"></canvas>
+            <p id='status'></p>
+        </div>
+
+    </div>
+
+    <div  id='output_screenshot' class="square-card content-column mdl-card mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text mdl-color-text--light-blue-900">Screenshot</h2>
+        </div>
+        <div class='mdl-card__media'>
+        <img id="screenshot-img" src="">
+        </div>
+    </div>
+    <div id='output_processed' class="rectangle-card content-column mdl-card mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text mdl-color-text--light-blue-900">Emotion detector</h2>
+        </div>
+        <div class='mdl-card__media'>
+        <img id="processed-img" src=""></img>
+
+    </div>
+
+</div>
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+    ///set up video and controls///
+    $(document).ready(
+
+        (function () {
+        const button = document.querySelector('#screenshot-button');
+        const img = document.querySelector('#screenshot-img');
+        const video = document.querySelector('#screenshot-video');
+        const processed = document.querySelector('#processed-img');
+
+        const canvas = document.querySelector('#canvas-element');
+
+        var constraints = {
+            video: true
+            
+        };
+        var for_snap = setInterval(snap, 700);
+
+        function snap() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+            // Other browsers will fall back to image/png
+            // img.src = canvas.toDataURL('image/png');
+            // console.log(canvas.toDataURL('image/png'));
+            let dataURL = canvas.toDataURL('image/jpeg');
+            stream_image(dataURL);
+        };
+
+        function handleSuccess(stream) {
+            video.srcObject = stream;
+        };
+
+        // function handleError(error) {
+        //     // console.log(error);
+        //     // alert(error);
+        // };
+        // function hasGetUserMedia() {
+        //     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+        // };
+        // console.log("ready!");
+        navigator.mediaDevices.getUserMedia(constraints).
+            then(handleSuccess).catch(function(error){console.log(error)});
+
+
+
+    const status = document.querySelector('#status');
+    function stream_image(img_string) {
+        $.ajax({
+            type: 'POST',
+            url: "{{ url_for('process') }}",
+            contentType: "application/json; charset=utf-8",
+            // data: JSON.stringify({ "img": img_string }),
+            data: JSON.stringify({ "img": img_string }),
+            success: function (data) {
+                // status.innerHTML = data;
+                // console.log(data)
+                processed.src = 'data:image/jpeg;base64,' + data
+            },
+            // error: function () {
+            //     alert('please wait !!!');
+            // }
+        })
+    };
+    })()
+    );
+
+</script>
+
+<!--    index ended here-->
+  
+
+</html>

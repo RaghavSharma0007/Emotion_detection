@@ -1,0 +1,43 @@
+<!-- //templates/index.html -->
+<html>
+<head>
+    <style>
+.container {
+    font-size: large;
+  
+}
+#mainbody a{
+      margin: 0 5px;
+ }
+
+    </style>
+<title>Emotion detector</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function myFunction() {
+      document.getElementById("demo").innerHTML =  "Hello Dear Visitor!</br> Webcam will start in a new window. press <h1>Esc</h1> to exit !! once it is started";
+    }
+  </script>
+</head>
+<body>
+    <div class='container' align="center">
+        <h1><span style="color: rgb(236, 19, 19)">Emotion detector</span></h1>
+        <h3>Click the button below to start the webcam</h3>
+            <form action="/webcam">
+                <button name="forwardBtn" type="submit" onclick="myFunction()" >Click here</button>
+                <p id="demo"></p>
+            </form>
+            <!-- <form action="/forward" method="post">
+                <button name="forward_Btn" type="submit" onclick="myFunction()" >Click here</button>
+                <p id="demo"></p>
+            </form> -->
+            
+
+
+
+    
+    </div>
+</body>
+</html>
